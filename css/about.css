@@ -1,0 +1,240 @@
+/* #0b2247 NAVBAR */
+/* #050f1f BACKGROUND */
+:root {}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+}
+
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #050f1f !important;
+}
+
+
+/* start header */
+header {
+    height: 100px;
+    background-color: #0b2247;
+  
+}
+
+header .nav {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    color: #ffffff;
+
+}
+
+header .nav h1 {
+    font-weight: 700;
+}
+
+header .nav ul {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+header .nav ul li {
+    list-style: none;
+    font-size: 20px;
+    position: relative;
+}
+
+header .nav ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+header .nav button {
+    width: 50px;
+    height: auto;
+    color: white;
+    background-color: #050f1f;
+    border: 0;
+    display: none;
+    border-radius: 20px;
+    padding: 5px;
+    text-align: center;
+
+}
+
+header .nav ul li:hover {
+    color: aqua;
+    border-bottom: 1px solid aqua;
+}
+
+header .nav ul li #link .active {
+    color: aqua;
+    border-bottom: 1px solid aqua;
+}
+
+header .nav ul li a:hover {
+    color: aqua;
+
+}
+
+.asideNav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+
+    background-color: #0b2247;
+    /* display: none; */
+}
+
+.asideNav .asideBar li {
+    margin-top: 10px;
+    width: 100%;
+    z-index: 3;
+}
+
+.asideNav .asideBar {
+    list-style: none;
+    color: white;
+    width: 100%;
+    z-index: 3;
+    background-color: #0b2247;
+   
+}
+
+.asideNav a:hover {
+    color: aqua;
+    border-bottom: 1px solid aqua;
+}
+
+.asideNav .asideBar a {
+    text-decoration: none;
+    color: white;
+    width: 100%;
+    text-align: center;
+
+
+}
+
+.asideNav .asideBar li {
+    border-bottom: rgb(69, 70, 70) 1px solid;
+}
+
+.asideNav .asideBar button {
+    border: none;
+    width: 50px;
+    height: auto;
+    color: white;
+    background-color: #050f1f;
+    margin-top: 10px;
+    border-radius: 20px;
+    padding: 5px;
+    text-align: center;
+}
+
+@media(max-width:900px) {
+    header .nav {
+        justify-content: end;
+    }
+
+    header .nav ul {
+        display: none;
+
+    }
+
+    header .nav button {
+        display: block;
+    }
+
+
+}
+
+@media(min-width:900px) {
+    .asideNav .asideBar {
+        display: none;
+    }
+}
+
+.landing {
+    text-align: center;
+    color: white;
+}
+
+.landing .text .targetp {
+    color: white;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+/* end header */
+
+/* start about */
+.main .head{
+    color: white;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-top: 50px;
+}
+.main .head::after{
+    content: "";
+    display: block;
+    width: 150px;
+    height: 3px;
+    background-color: aqua;
+    margin-bottom: 20px;
+}
+.main .about{
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    gap: 60px;
+    margin-bottom: 50px;
+
+}
+.main .about img{
+    width: 300px;
+    height: auto;
+}
+.main .about .data{
+    color: white;
+
+}
+.main .about .data .details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.main .about .data .details div>p{
+    color: white;
+    font-size: 20px;
+}
+.main .about .data .details div>p>span{
+    color: aqua;
+    font-size: 20px;
+    font-weight: 700;
+}
+@media(max-width:900px){
+.main .about {
+    display: flex;
+    flex-direction: column;
+}
+.main .about .data .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+}
+}
+
+/* end About */
