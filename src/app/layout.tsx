@@ -63,7 +63,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-black text-white min-h-screen antialiased selection:bg-white selection:text-black`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-[#030712] text-[#f3f4f6] min-h-screen antialiased selection:bg-indigo-600 selection:text-white`}
       >
         <SmartBackground />
         <div className="relative z-10 flex flex-col min-h-screen">

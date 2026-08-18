@@ -37,38 +37,38 @@ export default function Education() {
   return (
     <section id="education" className="py-28 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header (Slide Down) */}
+        {/* Section Header */}
         <MotionReveal direction="down" className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900/90 border border-white/[0.1] text-zinc-300 text-xs font-semibold uppercase tracking-wider mb-3 font-mono">
-            <GraduationCap className="w-3.5 h-3.5 text-zinc-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-indigo-500/30 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-3 font-mono shadow-[0_0_15px_rgba(99,102,241,0.15)]">
+            <GraduationCap className="w-3.5 h-3.5 text-indigo-400" />
             Academic & Certifications
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Education & <span className="text-gradient-silver">Diplomas</span>
+          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            Education & <span className="text-gradient-accent">Diplomas</span>
           </h2>
-          <div className="w-12 h-0.5 bg-white/40 rounded-full mt-4" />
+          <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-full mt-4" />
         </MotionReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Degree Card (University) (Slide from Left) */}
+          {/* Degree Card (University) */}
           <MotionReveal
             direction="left"
             delay={100}
-            className="lg:col-span-5 glass-card glass-card-hover p-8 rounded-3xl border border-white/[0.08] flex flex-col justify-between h-full"
+            className="lg:col-span-5 glass-card glass-card-hover p-8 rounded-3xl border border-slate-800 hover:border-indigo-500/40 flex flex-col justify-between h-full shadow-xl"
           >
             <div>
               <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-400 font-mono">
-                  <GraduationCap className="w-4 h-4 text-white" />
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-400 font-mono">
+                  <GraduationCap className="w-4 h-4 text-indigo-400" />
                   University Degree
                 </div>
-                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-zinc-900 border border-white/[0.1] text-white">
+                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-950/80 border border-emerald-500/40 text-emerald-300">
                   Grade: Very Good
                 </span>
               </div>
 
               <div className="flex items-center gap-4 mb-6">
-                <div className="relative w-16 h-16 rounded-2xl overflow-hidden bg-zinc-900 border border-white/[0.1] shrink-0">
+                <div className="relative w-16 h-16 rounded-2xl overflow-hidden bg-slate-900 border border-slate-700 shrink-0">
                   <Image
                     src="/images/images.jfif"
                     alt="Tanta University"
@@ -80,37 +80,37 @@ export default function Education() {
                   <h3 className="text-xl font-bold text-white leading-tight">
                     Bachelor of Commerce
                   </h3>
-                  <div className="text-sm font-medium text-zinc-400 mt-1">
+                  <div className="text-sm font-medium text-indigo-300 mt-1">
                     Major: Business Information Systems (BIS)
                   </div>
-                  <div className="text-xs text-zinc-500 mt-0.5">
+                  <div className="text-xs text-slate-400 mt-0.5">
                     Tanta University, Egypt
                   </div>
                 </div>
               </div>
 
-              <p className="text-sm text-zinc-300 leading-relaxed mb-6 font-normal">
+              <p className="text-sm text-slate-300 leading-relaxed mb-6 font-normal">
                 Focused on information systems, computer science foundations, business logic integration, relational database management, and modern software development principles.
               </p>
             </div>
 
-            <div className="flex items-center justify-between pt-6 border-t border-white/[0.08] text-xs text-zinc-400 font-mono">
+            <div className="flex items-center justify-between pt-6 border-t border-slate-800 text-xs text-slate-400 font-mono">
               <div className="flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-white" />
+                <Calendar className="w-3.5 h-3.5 text-indigo-400" />
                 2014 - 2018
               </div>
               <div className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-zinc-400" />
+                <MapPin className="w-3.5 h-3.5 text-cyan-400" />
                 Tanta, Egypt
               </div>
             </div>
           </MotionReveal>
 
-          {/* Professional Diplomas (Slide from Right with Stagger) */}
+          {/* Professional Diplomas */}
           <div className="lg:col-span-7 flex flex-col gap-5">
-            <MotionReveal direction="right" delay={100} className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-400 font-mono mb-1">
-              <Award className="w-4 h-4 text-white" />
-              Specialized Diplomas & Certificates
+            <MotionReveal direction="right" delay={100} className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-400 font-mono mb-1">
+              <Award className="w-4 h-4 text-indigo-400" />
+              Specialized Diplomas & Certifications
             </MotionReveal>
 
             {COURSES.map((course, idx) => (
@@ -118,9 +118,9 @@ export default function Education() {
                 key={idx}
                 direction="right"
                 delay={150 + idx * 150}
-                className="glass-card glass-card-hover p-6 sm:p-7 rounded-3xl border border-white/[0.08] flex flex-col sm:flex-row gap-5 items-start"
+                className="glass-card glass-card-hover p-6 sm:p-7 rounded-3xl border border-slate-800 hover:border-cyan-500/40 flex flex-col sm:flex-row gap-5 items-start shadow-xl"
               >
-                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-zinc-900 border border-white/[0.1] shrink-0 p-2 flex items-center justify-center">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-slate-900 border border-slate-700 shrink-0 p-2 flex items-center justify-center">
                   <Image
                     src={course.image}
                     alt={course.institution}
@@ -132,11 +132,11 @@ export default function Education() {
 
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-900 border border-white/[0.1] text-zinc-300">
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-950/80 border border-indigo-500/30 text-indigo-300 font-mono">
                       {course.tag}
                     </span>
-                    <div className="flex items-center gap-1 text-xs text-zinc-400 font-mono">
-                      <Calendar className="w-3.5 h-3.5 text-white" />
+                    <div className="flex items-center gap-1 text-xs text-slate-400 font-mono">
+                      <Calendar className="w-3.5 h-3.5 text-cyan-400" />
                       {course.period}
                     </div>
                   </div>
@@ -144,11 +144,11 @@ export default function Education() {
                   <h4 className="text-lg font-bold text-white mb-1">
                     {course.program}
                   </h4>
-                  <div className="text-sm font-medium text-zinc-400 mb-3">
-                    {course.institution} • <span className="text-zinc-500 text-xs">{course.location}</span>
+                  <div className="text-sm font-medium text-slate-300 mb-3">
+                    {course.institution} • <span className="text-slate-400 text-xs">{course.location}</span>
                   </div>
 
-                  <p className="text-sm text-zinc-400 leading-relaxed font-normal">
+                  <p className="text-sm text-slate-400 leading-relaxed font-normal">
                     {course.description}
                   </p>
                 </div>

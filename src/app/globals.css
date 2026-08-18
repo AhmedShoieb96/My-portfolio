@@ -7,70 +7,107 @@
   }
   
   body {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #030712;
+    color: #f3f4f6;
     font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     overflow-x: hidden;
     letter-spacing: -0.01em;
+    selection-background-color: #6366f1;
+    selection-color: #ffffff;
   }
 
-  /* Sleek Monochrome Scrollbar */
+  /* Custom Sleek Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #000000;
+    background: #030712;
   }
   ::-webkit-scrollbar-thumb {
-    background: #27272a;
+    background: #1f2937;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #52525b;
+    background: #374151;
   }
 }
 
-/* Luxury Monochrome Cards & Glass Utilities */
+/* Glassmorphism & Card Utilities */
 .glass-card {
-  background: rgba(18, 18, 20, 0.6);
+  background: rgba(15, 23, 42, 0.65);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 .glass-card-hover {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
 }
+
 .glass-card-hover:hover {
-  background: rgba(26, 26, 30, 0.85);
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.85), 0 0 24px -2px rgba(255, 255, 255, 0.08);
+  background: rgba(17, 24, 39, 0.85);
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 25px -5px rgba(99, 102, 241, 0.2);
   transform: translateY(-4px);
 }
 
-.glow-silver {
-  box-shadow: 0 0 30px -5px rgba(255, 255, 255, 0.12);
+/* Glowing Border Effect for Spotlight Cards */
+.glow-border {
+  position: relative;
 }
 
-.text-gradient-silver {
-  background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.5), rgba(168, 85, 247, 0.2), rgba(6, 182, 212, 0.4));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
+}
+
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+/* Gradients */
+.text-gradient-primary {
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.text-gradient-white {
-  background: linear-gradient(135deg, #ffffff 0%, #e4e4e7 60%, #a1a1aa 100%);
+.text-gradient-accent {
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Floating 3D animation for cards */
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-emerald {
+  background: linear-gradient(135deg, #34d399 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Animations */
 @keyframes floatSmooth {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-8px) rotate(0.5deg);
   }
 }
 
@@ -78,7 +115,34 @@
   animation: floatSmooth 6s ease-in-out infinite;
 }
 
-/* Subtle Shimmer & Pulse Animation */
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
 @keyframes subtleShimmer {
   0% {
     background-position: -200% 0;
@@ -89,7 +153,24 @@
 }
 
 .shimmer-badge {
-  background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.03) 100%);
+  background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(99,102,241,0.2) 50%, rgba(255,255,255,0.03) 100%);
   background-size: 200% 100%;
   animation: subtleShimmer 4s infinite linear;
+}
+
+.shimmer-button {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+}
+
+.shimmer-button:hover {
+  animation: subtleShimmer 1.5s infinite linear;
+}
+
+/* Background Cyber Grid */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }

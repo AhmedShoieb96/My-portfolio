@@ -17,7 +17,7 @@ export default function SmartBackground() {
     let height = (canvas.height = window.innerHeight);
 
     // Particle nodes definition
-    const particleCount = Math.min(Math.floor((width * height) / 16000), 75);
+    const particleCount = Math.min(Math.floor((width * height) / 14000), 85);
     const particles: Array<{
       x: number;
       y: number;
@@ -25,16 +25,18 @@ export default function SmartBackground() {
       vy: number;
       radius: number;
       alpha: number;
+      hue: number;
     }> = [];
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        radius: Math.random() * 1.5 + 0.8,
-        alpha: Math.random() * 0.4 + 0.2,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
+        radius: Math.random() * 1.8 + 0.6,
+        alpha: Math.random() * 0.5 + 0.2,
+        hue: Math.random() > 0.5 ? 220 : 260, // Cyan/Blue to Indigo/Purple tones
       });
     }
 
@@ -58,15 +60,6 @@ export default function SmartBackground() {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Draw subtle grid dots
-      const gridSize = 40;
-      ctx.fillStyle = "rgba(255, 255, 255, 0.02)";
-      for (let x = 0; x < width; x += gridSize) {
-        for (let y = 0; y < height; y += gridSize) {
-          ctx.fillRect(x, y, 1, 1);
-        }
-      }
-
       // Draw and connect particles
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
@@ -80,39 +73,39 @@ export default function SmartBackground() {
         if (p.y < 0) p.y = height;
         if (p.y > height) p.y = 0;
 
-        // Draw particle point
+        // Draw particle point with subtle color glow
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+        ctx.fillStyle = `hsla(${p.hue}, 80%, 75%, ${p.alpha})`;
         ctx.fill();
 
-        // Connect nearby particles with subtle silver lines
+        // Connect nearby particles
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const dx = p.x - p2.x;
           const dy = p.y - p2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 130) {
+          if (dist < 120) {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.12 * (1 - dist / 130)})`;
+            ctx.strokeStyle = `rgba(147, 197, 253, ${0.15 * (1 - dist / 120)})`;
             ctx.lineWidth = 0.6;
             ctx.stroke();
           }
         }
 
-        // Connect to mouse cursor
+        // Connect to mouse cursor with vibrant laser line
         const mdx = p.x - mouseX;
         const mdy = p.y - mouseY;
         const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (mdist < 160) {
+        if (mdist < 180) {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(mouseX, mouseY);
-          ctx.strokeStyle = `rgba(255, 255, 255, ${0.25 * (1 - mdist / 160)})`;
-          ctx.lineWidth = 0.8;
+          ctx.strokeStyle = `rgba(168, 85, 247, ${0.35 * (1 - mdist / 180)})`;
+          ctx.lineWidth = 0.9;
           ctx.stroke();
         }
       }
@@ -130,13 +123,19 @@ export default function SmartBackground() {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-black">
-      {/* Subtle radial ambient spotlight at top center */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-b from-white/[0.07] via-white/[0.02] to-transparent rounded-full blur-3xl pointer-events-none" />
-      {/* Canvas for interactive constellation particles */}
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#030712]">
+      {/* Dynamic Aurora Ambient Lights */}
+      <div className="absolute -top-40 left-1/4 w-[650px] h-[650px] bg-indigo-600/15 rounded-full blur-[140px] pointer-events-none animate-pulse-glow" />
+      <div className="absolute top-1/3 -right-20 w-[550px] h-[550px] bg-purple-600/12 rounded-full blur-[130px] pointer-events-none animate-pulse-glow" style={{ animationDelay: "2s" }} />
+      <div className="absolute -bottom-20 left-1/3 w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-[150px] pointer-events-none animate-pulse-glow" style={{ animationDelay: "4s" }} />
+
+      {/* Cyber Grid Pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-60" />
+
+      {/* Interactive Constellation Canvas */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full opacity-70"
+        className="absolute inset-0 w-full h-full opacity-80"
       />
     </div>
   );

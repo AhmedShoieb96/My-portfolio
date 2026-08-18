@@ -12,6 +12,8 @@ import {
   Code2,
   ChevronRight,
   Sparkles,
+  Zap,
+  Layers,
 } from "lucide-react";
 import MotionReveal from "@/components/MotionReveal";
 
@@ -81,12 +83,12 @@ const TECH_EXPERIENCES: TechRole[] = [
       },
     ],
     techStack: [
-      "Next.js",
+      "Next.js 15",
       "Redux Toolkit",
       "React.js",
       "TypeScript",
       "Tailwind CSS",
-      "Payment Gateways (Tamara, Apple Pay, WalaaOne, Visa)",
+      "Payment Gateways (Tamara, Apple Pay, WalaaOne)",
       "REST APIs",
       "Git & GitLab",
       "Admin Dashboards",
@@ -171,27 +173,25 @@ export default function Experience() {
   return (
     <section id="experience" className="py-28 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header (Slide Down) */}
+        {/* Section Header */}
         <MotionReveal direction="down" className="flex flex-col items-center text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900/90 border border-white/[0.1] text-zinc-300 text-xs font-semibold uppercase tracking-wider mb-3 font-mono">
-            <Briefcase className="w-3.5 h-3.5 text-zinc-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-indigo-500/30 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-3 font-mono shadow-[0_0_15px_rgba(99,102,241,0.15)]">
+            <Briefcase className="w-3.5 h-3.5 text-indigo-400" />
             Verified Career Record
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Professional <span className="text-gradient-silver">Experience</span>
+          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            Professional <span className="text-gradient-cyan">Experience</span>
           </h2>
-          <div className="w-12 h-0.5 bg-white/40 rounded-full mt-4" />
-        </MotionReveal>
+          <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full mt-4 mb-8" />
 
-        {/* Tab Toggle (Scale In) */}
-        <MotionReveal direction="scale" delay={100} className="flex items-center justify-center mb-14">
-          <div className="inline-flex p-1 rounded-2xl bg-zinc-900 border border-white/[0.08]">
+          {/* Tab Switcher */}
+          <div className="inline-flex p-1.5 rounded-2xl bg-slate-900/80 border border-slate-800 backdrop-blur-xl">
             <button
               onClick={() => setActiveTab("tech")}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
                 activeTab === "tech"
-                  ? "bg-white text-black shadow-md"
-                  : "text-zinc-400 hover:text-white"
+                  ? "bg-gradient-to-r from-indigo-600 to-cyan-500 text-white shadow-[0_0_20px_rgba(99,102,241,0.4)]"
+                  : "text-slate-400 hover:text-white"
               }`}
             >
               <Code2 className="w-4 h-4" />
@@ -199,195 +199,183 @@ export default function Experience() {
             </button>
             <button
               onClick={() => setActiveTab("banking")}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
                 activeTab === "banking"
-                  ? "bg-white text-black shadow-md"
-                  : "text-zinc-400 hover:text-white"
+                  ? "bg-gradient-to-r from-indigo-600 to-cyan-500 text-white shadow-[0_0_20px_rgba(99,102,241,0.4)]"
+                  : "text-slate-400 hover:text-white"
               }`}
             >
               <Building2 className="w-4 h-4" />
-              Banking & Finance ({BANKING_EXPERIENCES.length})
+              Corporate Banking & Finance ({BANKING_EXPERIENCES.length})
             </button>
           </div>
         </MotionReveal>
 
-        {/* Tech Experience Timeline */}
-        {activeTab === "tech" && (
-          <div className="relative max-w-5xl mx-auto space-y-12">
-            <div className="absolute left-4 sm:left-8 top-6 bottom-6 w-[1px] bg-gradient-to-b from-white/40 via-white/10 to-transparent" />
+        {/* Timeline Content */}
+        <div className="relative">
+          {/* Laser Circuit Line */}
+          <div className="hidden md:block absolute left-8 top-6 bottom-6 w-0.5 bg-gradient-to-b from-indigo-500 via-cyan-500 to-purple-500/20" />
 
-            {TECH_EXPERIENCES.map((exp, idx) => (
-              <MotionReveal
-                key={idx}
-                direction={idx % 2 === 0 ? "left" : "right"}
-                delay={idx * 150}
-                className="relative pl-12 sm:pl-20"
-              >
-                {/* Timeline Node */}
-                <div className="absolute left-2 sm:left-6 top-1.5 -translate-x-1/2 w-8 h-8 rounded-full bg-black border border-white/40 flex items-center justify-center text-white shadow-lg">
-                  <Code2 className="w-3.5 h-3.5" />
-                </div>
-
-                {/* Card */}
-                <div className="glass-card glass-card-hover p-6 sm:p-8 rounded-3xl border border-white/[0.08]">
-                  {/* Header */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-white/[0.08]">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1.5">
-                        {exp.isCurrent && (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-zinc-900 border border-white/[0.15] text-white text-xs font-semibold">
-                            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                            Current Role
-                          </span>
-                        )}
-                        <span className="text-xs font-mono text-zinc-400">
-                          {exp.location}
-                        </span>
-                      </div>
-                      <h3 className="text-2xl font-bold text-white">
-                        {exp.role}
-                      </h3>
-                      <div className="text-base font-semibold text-zinc-300 mt-0.5">
-                        {exp.company}
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-1.5 bg-zinc-900 px-3.5 py-1.5 rounded-xl border border-white/[0.08] text-zinc-300 text-xs font-mono self-start sm:self-auto">
-                      <Calendar className="w-3.5 h-3.5 text-white" />
-                      {exp.period}
-                    </div>
+          {activeTab === "tech" ? (
+            <div className="space-y-8">
+              {TECH_EXPERIENCES.map((exp, idx) => (
+                <MotionReveal
+                  key={idx}
+                  direction="up"
+                  delay={idx * 120}
+                  className="relative md:pl-20"
+                >
+                  {/* Timeline Circuit Node */}
+                  <div className="hidden md:flex absolute left-[26px] top-8 -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-500 border-4 border-slate-950 shadow-[0_0_15px_rgba(99,102,241,0.8)] items-center justify-center">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
                   </div>
 
-                  {/* If projects breakdown (like Creative Mind) */}
-                  {exp.projects && (
-                    <div className="space-y-6 mb-8">
-                      {exp.projects.map((proj, pIdx) => (
-                        <div
-                          key={pIdx}
-                          className="p-5 rounded-2xl bg-zinc-900/60 border border-white/[0.06]"
-                        >
-                          <div className="flex items-center justify-between gap-2 mb-3">
-                            <h4 className="text-base font-bold text-white flex items-center gap-2">
-                              <span>{proj.name}</span>
-                            </h4>
-                            {proj.url && (
-                              <a
-                                href={proj.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-xs font-mono text-zinc-400 hover:text-white transition-colors"
-                              >
-                                <span>Live App</span>
-                                <ExternalLink className="w-3 h-3" />
-                              </a>
-                            )}
-                          </div>
-
-                          <ul className="space-y-2">
-                            {proj.bulletPoints.map((pt, ptIdx) => (
-                              <li
-                                key={ptIdx}
-                                className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal"
-                              >
-                                <CheckCircle2 className="w-3.5 h-3.5 text-white shrink-0 mt-1" />
-                                <span>{pt}</span>
-                              </li>
-                            ))}
-                          </ul>
+                  <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-800/80 hover:border-indigo-500/40 transition-all duration-300 shadow-xl">
+                    <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-xl sm:text-2xl font-black text-white">
+                            {exp.role}
+                          </h3>
+                          {exp.isCurrent && (
+                            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/80 border border-emerald-500/40 text-emerald-400">
+                              Current Role
+                            </span>
+                          )}
                         </div>
-                      ))}
-                    </div>
-                  )}
+                        <div className="text-sm font-semibold text-indigo-400 mt-1">
+                          {exp.company} • <span className="text-slate-400 font-normal">{exp.location}</span>
+                        </div>
+                      </div>
 
-                  {/* Bullet points for single role (ITC Tanta) */}
-                  {exp.bulletPoints && (
-                    <div className="mb-8">
-                      <ul className="space-y-2.5">
-                        {exp.bulletPoints.map((pt, ptIdx) => (
+                      <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">
+                        <Calendar className="w-3.5 h-3.5 text-indigo-400" />
+                        {exp.period}
+                      </div>
+                    </div>
+
+                    {/* Projects Inside This Role */}
+                    {exp.projects && exp.projects.length > 0 && (
+                      <div className="space-y-4 my-6">
+                        <div className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2">
+                          <Zap className="w-3.5 h-3.5 text-indigo-400" />
+                          Key Commercial Platforms Engineered:
+                        </div>
+                        <div className="grid grid-cols-1 gap-3.5">
+                          {exp.projects.map((proj, pIdx) => (
+                            <div
+                              key={pIdx}
+                              className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800/90 hover:border-indigo-500/30 transition-colors"
+                            >
+                              <div className="flex items-center justify-between mb-2">
+                                <h4 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                                  <span>{proj.name}</span>
+                                </h4>
+                                {proj.url && (
+                                  <a
+                                    href={proj.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-1 text-xs text-indigo-400 hover:text-indigo-300 font-mono"
+                                  >
+                                    <span>Live</span>
+                                    <ExternalLink className="w-3 h-3" />
+                                  </a>
+                                )}
+                              </div>
+                              <ul className="space-y-1.5">
+                                {proj.bulletPoints.map((bp, bpIdx) => (
+                                  <li
+                                    key={bpIdx}
+                                    className="flex items-start gap-2 text-xs sm:text-sm text-slate-300"
+                                  >
+                                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                                    <span>{bp}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Additional Bullet Points */}
+                    {exp.bulletPoints && (
+                      <ul className="space-y-2 my-4">
+                        {exp.bulletPoints.map((bp, bpIdx) => (
                           <li
-                            key={ptIdx}
-                            className="flex items-start gap-2.5 text-sm sm:text-base text-zinc-300 leading-relaxed font-normal"
+                            key={bpIdx}
+                            className="flex items-start gap-2 text-xs sm:text-sm text-slate-300"
                           >
-                            <CheckCircle2 className="w-4 h-4 text-white shrink-0 mt-1" />
-                            <span>{pt}</span>
+                            <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
+                            <span>{bp}</span>
                           </li>
                         ))}
                       </ul>
-                    </div>
-                  )}
+                    )}
 
-                  {/* Tech stack */}
-                  <div className="pt-4 border-t border-white/[0.06]">
-                    <div className="text-xs font-mono uppercase text-zinc-400 mb-3 tracking-wider">
-                      Technologies & Tools:
-                    </div>
-                    <div className="flex flex-wrap gap-2">
+                    {/* Tech Stack Pills */}
+                    <div className="mt-6 pt-4 border-t border-slate-800/80 flex flex-wrap gap-1.5">
                       {exp.techStack.map((tech, tIdx) => (
                         <span
                           key={tIdx}
-                          className="px-2.5 py-1 rounded-lg text-xs font-medium bg-zinc-900 text-zinc-300 border border-white/[0.06]"
+                          className="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-slate-900 text-indigo-300 border border-indigo-500/20"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
                   </div>
-                </div>
-              </MotionReveal>
-            ))}
-          </div>
-        )}
+                </MotionReveal>
+              ))}
+            </div>
+          ) : (
+            /* Banking & Finance Experience */
+            <div className="space-y-8">
+              {BANKING_EXPERIENCES.map((exp, idx) => (
+                <MotionReveal
+                  key={idx}
+                  direction="up"
+                  delay={idx * 120}
+                  className="relative md:pl-20"
+                >
+                  <div className="hidden md:flex absolute left-[26px] top-8 -translate-x-1/2 w-4 h-4 rounded-full bg-cyan-500 border-4 border-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.8)] items-center justify-center" />
 
-        {/* Banking Experience Timeline */}
-        {activeTab === "banking" && (
-          <div className="relative max-w-5xl mx-auto space-y-8">
-            <div className="absolute left-4 sm:left-8 top-6 bottom-6 w-[1px] bg-gradient-to-b from-white/40 via-white/10 to-transparent" />
+                  <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-800/80 hover:border-cyan-500/40 transition-all duration-300 shadow-xl">
+                    <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-black text-white">
+                          {exp.role}
+                        </h3>
+                        <div className="text-sm font-semibold text-cyan-400 mt-1">
+                          {exp.company}
+                        </div>
+                      </div>
 
-            {BANKING_EXPERIENCES.map((exp, idx) => (
-              <MotionReveal
-                key={idx}
-                direction={idx % 2 === 0 ? "left" : "right"}
-                delay={idx * 120}
-                className="relative pl-12 sm:pl-20"
-              >
-                {/* Timeline Node */}
-                <div className="absolute left-2 sm:left-6 top-1.5 -translate-x-1/2 w-8 h-8 rounded-full bg-black border border-white/40 flex items-center justify-center text-white shadow-lg">
-                  <Building2 className="w-3.5 h-3.5" />
-                </div>
-
-                <div className="glass-card glass-card-hover p-6 sm:p-8 rounded-3xl border border-white/[0.08]">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-white/[0.08]">
-                    <div>
-                      <h3 className="text-xl font-bold text-white">
-                        {exp.role}
-                      </h3>
-                      <div className="text-sm font-semibold text-zinc-300 mt-0.5">
-                        {exp.company}
+                      <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">
+                        <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+                        {exp.period}
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1.5 bg-zinc-900 px-3.5 py-1.5 rounded-xl border border-white/[0.08] text-zinc-300 text-xs font-mono self-start sm:self-auto">
-                      <Calendar className="w-3.5 h-3.5 text-white" />
-                      {exp.period}
-                    </div>
+                    <ul className="space-y-2 mt-4">
+                      {exp.bulletPoints.map((bp, bpIdx) => (
+                        <li
+                          key={bpIdx}
+                          className="flex items-start gap-2 text-xs sm:text-sm text-slate-300"
+                        >
+                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
+                          <span>{bp}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-
-                  <ul className="space-y-2.5">
-                    {exp.bulletPoints.map((pt, ptIdx) => (
-                      <li
-                        key={ptIdx}
-                        className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal"
-                      >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-zinc-400 shrink-0 mt-0.5" />
-                        <span>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </MotionReveal>
-            ))}
-          </div>
-        )}
+                </MotionReveal>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

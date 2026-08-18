@@ -12,11 +12,8 @@ import {
   Server,
   Layers,
   GitBranch,
-  Smartphone,
-  BrainCircuit,
-  Languages as LanguagesIcon,
-  Workflow,
-  Network,
+  Terminal,
+  Zap,
 } from "lucide-react";
 import {
   NextjsIcon,
@@ -37,273 +34,235 @@ import MotionReveal from "@/components/MotionReveal";
 
 interface SkillItem {
   name: string;
-  category: "languages" | "frontend" | "backend" | "tools" | "spoken";
-  level?: string;
+  category: "languages" | "frontend" | "backend" | "tools";
+  level: "Expert" | "Advanced" | "Proficient";
   renderIcon: () => React.ReactNode;
   description: string;
+  glowColor: string;
 }
 
 const SKILLS_DATA: SkillItem[] = [
-  // Full-Stack & Backend / Databases
+  // Backend & Databases
   {
-    name: "Full-Stack with Next.js",
+    name: "Next.js 15 (Full-Stack)",
     category: "backend",
     level: "Advanced",
     renderIcon: () => <NextjsIcon className="w-6 h-6 text-white" />,
     description:
-      "End-to-end full-stack development with Next.js 15 App Router, React Server Components (RSC), Server Actions, and RESTful API endpoints.",
+      "Full-Stack development with App Router, React Server Components (RSC), Server Actions, and REST API endpoints.",
+    glowColor: "group-hover:border-white/40 group-hover:shadow-[0_0_25px_rgba(255,255,255,0.15)]",
   },
   {
     name: "PostgreSQL",
     category: "backend",
     level: "Proficient",
-    renderIcon: () => <PostgresIcon className="w-6 h-6 text-white" />,
+    renderIcon: () => <PostgresIcon className="w-6 h-6 text-[#336791]" />,
     description:
-      "Relational SQL database design, indexing, ACID transactions, complex joins, and query optimization for high concurrency.",
+      "Relational database design, indexes, ACID transactions, complex joins, and query optimization for high concurrency.",
+    glowColor: "group-hover:border-[#336791]/50 group-hover:shadow-[0_0_25px_rgba(51,103,145,0.3)]",
   },
   {
     name: "MongoDB",
     category: "backend",
     level: "Proficient",
-    renderIcon: () => <MongoIcon className="w-6 h-6 text-white" />,
+    renderIcon: () => <MongoIcon className="w-6 h-6 text-[#00ed64]" />,
     description:
-      "NoSQL document database, schema modeling with Mongoose, aggregation pipelines, and high-performance unstructured data storage.",
+      "NoSQL document database, schema modeling with Mongoose, aggregation pipelines, and high-performance data storage.",
+    glowColor: "group-hover:border-[#00ed64]/50 group-hover:shadow-[0_0_25px_rgba(0,237,100,0.3)]",
   },
   {
     name: "Supabase",
     category: "backend",
     level: "Proficient",
-    renderIcon: () => <SupabaseIcon className="w-6 h-6 text-white" />,
+    renderIcon: () => <SupabaseIcon className="w-6 h-6 text-[#3ecf8e]" />,
     description:
-      "Backend-as-a-Service (BaaS) utilizing hosted PostgreSQL, Row Level Security (RLS), real-time database listeners, and Auth management.",
+      "Hosted PostgreSQL backend, Row Level Security (RLS), real-time database listeners, and Auth management.",
+    glowColor: "group-hover:border-[#3ecf8e]/50 group-hover:shadow-[0_0_25px_rgba(62,207,142,0.3)]",
   },
   {
     name: "Oracle SQL | PL SQL",
     category: "backend",
-    level: "Intermediate",
-    renderIcon: () => <Database className="w-6 h-6 text-white" />,
+    level: "Proficient",
+    renderIcon: () => <Database className="w-6 h-6 text-amber-400" />,
     description:
       "Database schema architecture, stored procedures, triggers, view creation, and relational queries.",
+    glowColor: "group-hover:border-amber-400/50 group-hover:shadow-[0_0_25px_rgba(251,191,36,0.3)]",
   },
 
-  // Frontend Frameworks & Libraries
+  // Frontend
   {
     name: "React.js",
     category: "frontend",
     level: "Advanced",
-    renderIcon: () => <ReactIcon className="w-6 h-6 text-white" />,
+    renderIcon: () => <ReactIcon className="w-6 h-6 text-[#00d8ff]" />,
     description:
       "Component-driven architecture, custom hooks, context API, state management, and virtual DOM optimization.",
+    glowColor: "group-hover:border-[#00d8ff]/50 group-hover:shadow-[0_0_25px_rgba(0,216,255,0.3)]",
   },
   {
-    name: "Vue.js",
+    name: "Vue.js (Vue 3)",
     category: "frontend",
     level: "Proficient",
-    renderIcon: () => <VueIcon className="w-6 h-6 text-white" />,
+    renderIcon: () => <VueIcon className="w-6 h-6 text-[#42b883]" />,
     description:
-      "Progressive JavaScript framework featuring Vue 3 Composition API, reactive state management (Pinia/Vuex), and single-file components (SFC).",
+      "Composition API, Pinia state management, Vue Router, reactive systems, and single-file component architecture.",
+    glowColor: "group-hover:border-[#42b883]/50 group-hover:shadow-[0_0_25px_rgba(66,184,131,0.3)]",
   },
   {
-    name: "Angular",
-    category: "frontend",
-    level: "Intermediate",
-    renderIcon: () => <AngularIcon className="w-6 h-6 text-white" />,
+    name: "TypeScript",
+    category: "languages",
+    level: "Advanced",
+    renderIcon: () => <TypescriptIcon className="w-6 h-6 text-[#3178c6]" />,
     description:
-      "TypeScript-based enterprise web architecture, dependency injection, RxJS observables, and modular components.",
+      "Strict type definitions, generics, utility types, interface contracts, and full type safety across apps.",
+    glowColor: "group-hover:border-[#3178c6]/50 group-hover:shadow-[0_0_25px_rgba(49,120,198,0.3)]",
   },
   {
     name: "Tailwind CSS",
     category: "frontend",
-    level: "Advanced",
-    renderIcon: () => <TailwindIcon className="w-6 h-6 text-white" />,
+    level: "Expert",
+    renderIcon: () => <TailwindIcon className="w-6 h-6 text-[#38bdf8]" />,
     description:
-      "Modern utility-first CSS, custom themes, dark luxury monochrome systems, and fluid responsive design.",
+      "Utility-first styling, dark/light themes, responsive design systems, animations, and zero runtime CSS overhead.",
+    glowColor: "group-hover:border-[#38bdf8]/50 group-hover:shadow-[0_0_25px_rgba(56,189,248,0.3)]",
   },
   {
-    name: "Bootstrap 5",
+    name: "Redux Toolkit",
     category: "frontend",
     level: "Advanced",
-    renderIcon: () => <BootstrapIcon className="w-6 h-6 text-white" />,
+    renderIcon: () => <Layers className="w-6 h-6 text-purple-400" />,
     description:
-      "Rapid responsive layouts, flexbox grid system, and interactive modular components.",
-  },
-
-  // Core Languages
-  {
-    name: "TypeScript",
-    category: "languages",
-    level: "Proficient",
-    renderIcon: () => <TypescriptIcon className="w-6 h-6 text-white" />,
-    description:
-      "Strong static typing across front-end and back-end, generic types, interfaces, and compile-time error prevention.",
+      "Predictable global state container, RTK Query caching, slice reducers, and seamless async data fetching.",
+    glowColor: "group-hover:border-purple-400/50 group-hover:shadow-[0_0_25px_rgba(168,85,247,0.3)]",
   },
   {
     name: "JavaScript (ES6+)",
     category: "languages",
-    level: "Advanced",
-    renderIcon: () => <JavascriptIcon className="w-6 h-6 text-white" />,
-    description:
-      "Async/Await, Promises, Event Loop, closures, modern ESNext features, and browser/Node runtime APIs.",
-  },
-  {
-    name: "HTML5",
-    category: "languages",
     level: "Expert",
-    renderIcon: () => <Html5Icon className="w-6 h-6 text-white" />,
+    renderIcon: () => <JavascriptIcon className="w-6 h-6 text-[#f7df1e]" />,
     description:
-      "Semantic elements, accessible web hierarchy (a11y), and search engine optimization (SEO) best practices.",
-  },
-  {
-    name: "CSS3 / SASS",
-    category: "languages",
-    level: "Expert",
-    renderIcon: () => <Css3Icon className="w-6 h-6 text-white" />,
-    description:
-      "CSS Grid, Flexbox, custom keyframe animations, responsive media queries, and glassmorphism styling.",
+      "Modern ECMAScript features, closures, promises, async/await, event loop, and functional programming.",
+    glowColor: "group-hover:border-[#f7df1e]/50 group-hover:shadow-[0_0_25px_rgba(247,223,30,0.3)]",
   },
 
-  // Tools & Workflow
+  // Tools & Architecture
   {
     name: "Git & GitHub",
     category: "tools",
-    level: "Proficient",
-    renderIcon: () => <GitBranch className="w-6 h-6 text-white" />,
+    level: "Advanced",
+    renderIcon: () => <GitBranch className="w-6 h-6 text-orange-400" />,
     description:
-      "Feature branching workflows, pull requests, merge conflict resolution, and collaborative version control.",
+      "Version control, branch management, pull requests, merge conflict resolution, and CI/CD automated actions.",
+    glowColor: "group-hover:border-orange-400/50 group-hover:shadow-[0_0_25px_rgba(249,115,22,0.3)]",
   },
   {
     name: "REST APIs & Postman",
     category: "tools",
     level: "Advanced",
-    renderIcon: () => <Network className="w-6 h-6 text-white" />,
+    renderIcon: () => <Globe className="w-6 h-6 text-indigo-400" />,
     description:
-      "Designing and consuming RESTful endpoints, async data fetching, error boundary handling, Postman testing, and API documentation.",
+      "API design, endpoint documentation, status code standards, automated testing with Postman collections.",
+    glowColor: "group-hover:border-indigo-400/50 group-hover:shadow-[0_0_25px_rgba(99,102,241,0.3)]",
   },
   {
-    name: "Responsive Design",
+    name: "Payment Gateways",
     category: "tools",
-    level: "Expert",
-    renderIcon: () => <Smartphone className="w-6 h-6 text-white" />,
+    level: "Advanced",
+    renderIcon: () => <Zap className="w-6 h-6 text-amber-300" />,
     description:
-      "Mobile-first responsive methodology, touch gesture handling, and cross-device interface consistency.",
-  },
-  {
-    name: "Problem Solving",
-    category: "tools",
-    level: "Proficient",
-    renderIcon: () => <BrainCircuit className="w-6 h-6 text-white" />,
-    description:
-      "Data structure manipulation, full-stack debugging, clean code refactoring, and algorithmic problem solving.",
-  },
-
-  // Spoken Languages
-  {
-    name: "Arabic",
-    category: "spoken",
-    level: "Native",
-    renderIcon: () => <LanguagesIcon className="w-6 h-6 text-white" />,
-    description:
-      "Mother tongue (Native fluency in speaking, writing, and professional technical discussion)",
-  },
-  {
-    name: "English",
-    category: "spoken",
-    level: "Very Good",
-    renderIcon: () => <Globe className="w-6 h-6 text-white" />,
-    description:
-      "Professional working proficiency for reading documentation, writing clean code, and team collaboration",
+      "Commercial integrations with Tamara, Apple Pay, MyFatoorah, Al Rajhi, and Visa/Mastercard processing.",
+    glowColor: "group-hover:border-amber-300/50 group-hover:shadow-[0_0_25px_rgba(252,211,77,0.3)]",
   },
 ];
 
-const TABS = [
-  { id: "all", label: "All Skills", icon: Sparkles },
-  { id: "backend", label: "Full-Stack & DBs", icon: Database },
-  { id: "frontend", label: "Frontend UI", icon: Cpu },
-  { id: "languages", label: "Languages", icon: Code2 },
-  { id: "tools", label: "Tools", icon: Wrench },
-  { id: "spoken", label: "Languages", icon: Globe },
+const CATEGORIES = [
+  { id: "all", label: "All Arsenal" },
+  { id: "backend", label: "Backend & Databases" },
+  { id: "frontend", label: "Frontend Frameworks" },
+  { id: "languages", label: "Languages" },
+  { id: "tools", label: "Tools & Integrations" },
 ];
 
 export default function Skills() {
-  const [activeTab, setActiveTab] = useState<string>("all");
+  const [activeCategory, setActiveCategory] = useState<string>("all");
 
   const filteredSkills =
-    activeTab === "all"
+    activeCategory === "all"
       ? SKILLS_DATA
-      : SKILLS_DATA.filter((s) => s.category === activeTab);
+      : SKILLS_DATA.filter((s) => s.category === activeCategory);
 
   return (
     <section id="skills" className="py-28 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header (Slide Down) */}
-        <MotionReveal direction="down" className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900/90 border border-white/[0.1] text-zinc-300 text-xs font-semibold uppercase tracking-wider mb-3 font-mono">
-            <Layers className="w-3.5 h-3.5 text-zinc-400" />
-            Technical Matrix
+        {/* Section Header */}
+        <MotionReveal direction="down" className="flex flex-col items-center text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-indigo-500/30 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-3 font-mono shadow-[0_0_15px_rgba(99,102,241,0.15)]">
+            <Cpu className="w-3.5 h-3.5 text-indigo-400" />
+            Core Competencies
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Skills & <span className="text-gradient-silver">Tech Stack</span>
+          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            Technical <span className="text-gradient-cyan">Arsenal</span>
           </h2>
-          <div className="w-12 h-0.5 bg-white/40 rounded-full mt-4" />
-        </MotionReveal>
+          <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full mt-4 mb-8" />
 
-        {/* Filter Tabs (Scale In) */}
-        <MotionReveal direction="scale" delay={100} className="flex flex-wrap items-center justify-center gap-2 mb-12">
-          {TABS.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
+          {/* Category Filter Tabs */}
+          <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-slate-900/80 border border-slate-800 backdrop-blur-xl">
+            {CATEGORIES.map((cat) => (
               <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer ${
-                  isActive
-                    ? "bg-white text-black font-semibold shadow-md scale-105"
-                    : "bg-zinc-900/80 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-white/[0.06]"
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${
+                  activeCategory === cat.id
+                    ? "bg-gradient-to-r from-indigo-600 to-cyan-500 text-white shadow-[0_0_20px_rgba(99,102,241,0.4)]"
+                    : "text-slate-400 hover:text-white hover:bg-slate-800/60"
                 }`}
               >
-                <Icon className="w-4 h-4" />
-                {tab.label}
+                {cat.label}
               </button>
-            );
-          })}
+            ))}
+          </div>
         </MotionReveal>
 
-        {/* Skills Grid with Staggered Upward Reveal */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {filteredSkills.map((skill, index) => (
+        {/* Skills Grid with Glowing Brand Hover Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {filteredSkills.map((skill, idx) => (
             <MotionReveal
               key={skill.name}
               direction="up"
-              delay={(index % 4) * 80}
-              className="glass-card glass-card-hover p-6 rounded-2xl border border-white/[0.08] flex flex-col justify-between group transition-all duration-300"
+              delay={idx * 50}
+              className={`glass-card p-6 rounded-2xl border border-slate-800/80 bg-slate-950/60 hover:bg-slate-900/80 transition-all duration-300 group flex flex-col justify-between ${skill.glowColor}`}
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  {/* Distinct Official Vector Icon */}
-                  <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-white/[0.08] flex items-center justify-center group-hover:border-white/30 group-hover:bg-zinc-800 transition-all duration-300 shadow-sm">
+                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 group-hover:scale-110 transition-transform duration-300 shadow-inner">
                     {skill.renderIcon()}
                   </div>
-
-                  {skill.level && (
-                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-zinc-900 border border-white/[0.08] text-zinc-300">
-                      {skill.level}
-                    </span>
-                  )}
+                  <span
+                    className={`text-[11px] font-mono px-2.5 py-1 rounded-full border ${
+                      skill.level === "Expert"
+                        ? "bg-emerald-950/60 border-emerald-500/40 text-emerald-300"
+                        : skill.level === "Advanced"
+                        ? "bg-indigo-950/60 border-indigo-500/40 text-indigo-300"
+                        : "bg-blue-950/60 border-blue-500/40 text-blue-300"
+                    }`}
+                  >
+                    ● {skill.level}
+                  </span>
                 </div>
 
-                <h3 className="text-base font-bold text-white group-hover:text-zinc-200 transition-colors mb-2">
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-indigo-200 transition-colors">
                   {skill.name}
                 </h3>
-
-                <p className="text-xs text-zinc-400 leading-relaxed mb-4 font-normal">
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal">
                   {skill.description}
                 </p>
               </div>
 
-              <div className="flex items-center gap-1.5 text-xs text-zinc-500 font-mono pt-3 border-t border-white/[0.06]">
-                <CheckCircle className="w-3.5 h-3.5 text-zinc-400" />
-                <span>Verified in Production</span>
+              <div className="mt-4 pt-3 border-t border-slate-800/60 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                <span className="capitalize">{skill.category}</span>
+                <span className="text-indigo-400 font-semibold group-hover:translate-x-0.5 transition-transform">
+                  Verified ✓
+                </span>
               </div>
             </MotionReveal>
           ))}
